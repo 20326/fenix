@@ -213,7 +213,7 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         get() = isCrashReportEnabledInBuild &&
                 preferences.getBoolean(
                     appContext.getPreferenceKey(R.string.pref_key_crash_reporter),
-                    true
+                    false
                 )
 
     val isRemoteDebuggingEnabled by booleanPreference(

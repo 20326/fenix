@@ -97,25 +97,25 @@ class Core(
      * configuration (see build variants).
      */
     val engine: Engine by lazy {
-        val defaultSettings = DefaultSettings(
-            requestInterceptor = requestInterceptor,
-            remoteDebuggingEnabled = context.settings().isRemoteDebuggingEnabled &&
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
-            testingModeEnabled = false,
-            trackingProtectionPolicy = trackingProtectionPolicyFactory.createTrackingProtectionPolicy(),
-            historyTrackingDelegate = HistoryDelegate(lazyHistoryStorage),
-            preferredColorScheme = getPreferredColorScheme(),
-            automaticFontSizeAdjustment = context.settings().shouldUseAutoSize,
-            fontInflationEnabled = context.settings().shouldUseAutoSize,
-            suspendMediaWhenInactive = false,
-            forceUserScalableContent = context.settings().forceEnableZoom,
-            loginAutofillEnabled = context.settings().shouldAutofillLogins,
-            clearColor = ContextCompat.getColor(
-                context,
-                R.color.foundation_normal_theme
-            )
-        )
-
+//        val defaultSettings = DefaultSettings(
+//            requestInterceptor = requestInterceptor,
+//            remoteDebuggingEnabled = context.settings().isRemoteDebuggingEnabled &&
+//                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
+//            testingModeEnabled = false,
+//            trackingProtectionPolicy = trackingProtectionPolicyFactory.createTrackingProtectionPolicy(),
+//            historyTrackingDelegate = HistoryDelegate(lazyHistoryStorage),
+//            preferredColorScheme = getPreferredColorScheme(),
+//            automaticFontSizeAdjustment = context.settings().shouldUseAutoSize,
+//            fontInflationEnabled = context.settings().shouldUseAutoSize,
+//            suspendMediaWhenInactive = false,
+//            forceUserScalableContent = context.settings().forceEnableZoom,
+//            loginAutofillEnabled = context.settings().shouldAutofillLogins,
+//            clearColor = ContextCompat.getColor(
+//                context,
+//                R.color.foundation_normal_theme
+//            )
+//        )
+        val defaultSettings = DefaultSettings()
         SystemEngine(context, defaultSettings)
 
 //        GeckoEngine(
