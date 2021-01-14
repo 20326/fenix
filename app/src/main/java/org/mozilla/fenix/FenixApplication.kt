@@ -111,7 +111,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     @CallSuper
     open fun setupInAllProcesses() {
-        setupCrashReporting()
+        // setupCrashReporting()
 
         // We want the log messages of all builds to go to Android logcat
         Log.addSink(FenixLogSink(logsDebug = Config.channel.isDebug))
@@ -131,7 +131,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
                 components.core.engine.warmUp()
             }
-            initializeWebExtensionSupport()
+            // initializeWebExtensionSupport()
             restoreBrowserState()
             restoreDownloads()
 
@@ -306,7 +306,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         return GlobalScope.async(Dispatchers.IO) {
             // ... but RustHttpConfig.setClient() and RustLog.enable() can be called later.
             RustHttpConfig.setClient(lazy { components.core.client })
-            RustLog.enable(components.analytics.crashReporter)
+            // RustLog.enable(components.analytics.crashReporter)
         }
     }
 

@@ -931,11 +931,11 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler,
         super.onResume()
         val components = requireComponents
 
-        val preferredColorScheme = components.core.getPreferredColorScheme()
-        if (components.core.engine.settings.preferredColorScheme != preferredColorScheme) {
-            components.core.engine.settings.preferredColorScheme = preferredColorScheme
-            components.useCases.sessionUseCases.reload()
-        }
+//        val preferredColorScheme = components.core.getPreferredColorScheme()
+//        if (components.core.engine.settings.preferredColorScheme != preferredColorScheme) {
+//            components.core.engine.settings.preferredColorScheme = preferredColorScheme
+//            components.useCases.sessionUseCases.reload()
+//        }
         hideToolbar()
 
         components.core.store.state.findTabOrCustomTabOrSelectedTab(customTabSessionId)?.let {
