@@ -36,6 +36,8 @@ object Versions {
     const val google_material = "1.2.1"
 
     const val mozilla_android_components = AndroidComponents.VERSION
+    const val mozilla_android_system_engine = "70.0.9"
+    const val mozilla_lib_fetch_httpurlconnection = "70.0.9"
 
     const val adjust = "4.18.3"
     const val installreferrer = "1.0"
@@ -79,6 +81,8 @@ object Deps {
     const val mozilla_browser_engine_gecko_nightly = "org.mozilla.components:browser-engine-gecko-nightly:${Versions.mozilla_android_components}"
     const val mozilla_browser_engine_gecko_beta = "org.mozilla.components:browser-engine-gecko-beta:${Versions.mozilla_android_components}"
     const val mozilla_browser_engine_gecko_release = "org.mozilla.components:browser-engine-gecko:${Versions.mozilla_android_components}"
+    const val mozilla_browser_engine_system = "org.mozilla.components:browser-engine-system:${Versions.mozilla_android_system_engine}"
+    const val mozilla_browser_fetch_httpurlconnection= "org.mozilla.components:lib-fetch-httpurlconnection:${Versions.mozilla_lib_fetch_httpurlconnection}"
     const val mozilla_browser_domains = "org.mozilla.components:browser-domains:${Versions.mozilla_android_components}"
     const val mozilla_browser_icons = "org.mozilla.components:browser-icons:${Versions.mozilla_android_components}"
     const val mozilla_browser_search = "org.mozilla.components:browser-search:${Versions.mozilla_android_components}"
@@ -175,6 +179,7 @@ object Deps {
     const val androidx_lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.androidx_lifecycle}"
     const val androidx_lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidx_lifecycle}"
     const val androidx_lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidx_lifecycle}"
+    const val androidx_lifecycle_process= "androidx.lifecycle:lifecycle-process:${Versions.androidx_lifecycle}"
     const val androidx_paging = "androidx.paging:paging-runtime-ktx:${Versions.androidx_paging}"
     const val androidx_preference = "androidx.preference:preference-ktx:${Versions.androidx_preference}"
     const val androidx_safeargs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.androidx_navigation}"

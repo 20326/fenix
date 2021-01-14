@@ -4,15 +4,17 @@
 
 package org.mozilla.fenix.components
 
-import GeckoProvider
+// import GeckoProvider
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.os.StrictMode
 import androidx.core.content.ContextCompat
 import io.sentry.Sentry
-import mozilla.components.browser.engine.gecko.GeckoEngine
-import mozilla.components.browser.engine.gecko.fetch.GeckoViewFetchClient
+//import mozilla.components.browser.engine.gecko.GeckoEngine
+import mozilla.components.browser.engine.system.SystemEngine
+//import mozilla.components.browser.engine.gecko.fetch.GeckoViewFetchClient
+import mozilla.components.lib.fetch.httpurlconnection.HttpURLConnectionClient
 import mozilla.components.browser.icons.BrowserIcons
 import mozilla.components.browser.session.Session
 import mozilla.components.browser.session.SessionManager
@@ -94,7 +96,7 @@ class Core(
      * The browser engine component initialized based on the build
      * configuration (see build variants).
      */
-    val engine: Engine by lazyMonitored {
+    val engine: Engine by lazy {
         val defaultSettings = DefaultSettings(
             requestInterceptor = requestInterceptor,
             remoteDebuggingEnabled = context.settings().isRemoteDebuggingEnabled &&
@@ -114,27 +116,29 @@ class Core(
             )
         )
 
-        GeckoEngine(
-            context,
-            defaultSettings,
-            GeckoProvider.getOrCreateRuntime(
-                context,
-                lazyPasswordsStorage,
-                trackingProtectionPolicyFactory.createTrackingProtectionPolicy()
-            )
-        ).also {
-            WebCompatFeature.install(it)
+        SystemEngine(context, defaultSettings)
 
-            /**
-             * There are some issues around localization to be resolved, as well as questions around
-             * the capacity of the WebCompat team, so the "Report site issue" feature should stay
-             * disabled in Fenix Release builds for now.
-             * This is consistent with both Fennec and Firefox Desktop.
-             */
-            if (Config.channel.isNightlyOrDebug || Config.channel.isBeta) {
-                WebCompatReporterFeature.install(it, "fenix")
-            }
-        }
+//        GeckoEngine(
+//            context,
+//            defaultSettings,
+//            GeckoProvider.getOrCreateRuntime(
+//                context,
+//                lazyPasswordsStorage,
+//                trackingProtectionPolicyFactory.createTrackingProtectionPolicy()
+//            )
+//        ).also {
+//            WebCompatFeature.install(it)
+//
+//            /**
+//             * There are some issues around localization to be resolved, as well as questions around
+//             * the capacity of the WebCompat team, so the "Report site issue" feature should stay
+//             * disabled in Fenix Release builds for now.
+//             * This is consistent with both Fennec and Firefox Desktop.
+//             */
+//            if (Config.channel.isNightlyOrDebug || Config.channel.isBeta) {
+//                WebCompatReporterFeature.install(it, "fenix")
+//            }
+//        }
     }
 
     /**
@@ -149,15 +153,19 @@ class Core(
     /**
      * [Client] implementation to be used for code depending on `concept-fetch``
      */
+//    val client: Client by lazyMonitored {
+//        GeckoViewFetchClient(
+//            context,
+//            GeckoProvider.getOrCreateRuntime(
+//                context,
+//                lazyPasswordsStorage,
+//                trackingProtectionPolicyFactory.createTrackingProtectionPolicy()
+//            )
+//        )
+//    }
+
     val client: Client by lazyMonitored {
-        GeckoViewFetchClient(
-            context,
-            GeckoProvider.getOrCreateRuntime(
-                context,
-                lazyPasswordsStorage,
-                trackingProtectionPolicyFactory.createTrackingProtectionPolicy()
-            )
-        )
+        HttpURLConnectionClient()
     }
 
     val sessionStorage: SessionStorage by lazyMonitored {
@@ -165,11 +173,12 @@ class Core(
     }
 
     private val locationService: LocationService by lazyMonitored {
-        if (Config.channel.isDebug || BuildConfig.MLS_TOKEN.isEmpty()) {
-            LocationService.default()
-        } else {
-            MozillaLocationService(context, client, BuildConfig.MLS_TOKEN)
-        }
+//        if (Config.channel.isDebug || BuildConfig.MLS_TOKEN.isEmpty()) {
+//            LocationService.default()
+//        } else {
+//            MozillaLocationService(context, client, BuildConfig.MLS_TOKEN)
+//        }
+        LocationService.default()
     }
 
     /**
@@ -223,7 +232,7 @@ class Core(
      * The [RelationChecker] checks Digital Asset Links relationships for Trusted Web Activities.
      */
     val relationChecker: RelationChecker by lazyMonitored {
-        StatementRelationChecker(StatementApi(client))
+        StatementRelationChecker(StatementApi(httpClient = HttpURLConnectionClient()))
     }
 
     /**
@@ -258,7 +267,7 @@ class Core(
      * Icons component for loading, caching and processing website icons.
      */
     val icons by lazyMonitored {
-        BrowserIcons(context, client)
+        BrowserIcons(context, httpClient = HttpURLConnectionClient())
     }
 
     val metrics by lazyMonitored {
@@ -279,7 +288,7 @@ class Core(
     val webAppShortcutManager by lazyMonitored {
         WebAppShortcutManager(
             context,
-            client,
+            httpClient = HttpURLConnectionClient(),
             webAppManifestStorage
         )
     }

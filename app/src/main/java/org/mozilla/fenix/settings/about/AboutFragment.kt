@@ -32,7 +32,7 @@ import org.mozilla.fenix.settings.about.AboutItemType.SUPPORT
 import org.mozilla.fenix.settings.about.AboutItemType.WHATS_NEW
 import org.mozilla.fenix.utils.Do
 import org.mozilla.fenix.whatsnew.WhatsNew
-import org.mozilla.geckoview.BuildConfig as GeckoViewBuildConfig
+// import org.mozilla.geckoview.BuildConfig as GeckoViewBuildConfig
 
 /**
  * Displays the logo and information about the app, including library versions.
@@ -97,8 +97,8 @@ class AboutFragment : Fragment(), AboutPageListener {
             val componentsVersion =
                 mozilla.components.Build.version + ", " + mozilla.components.Build.gitHash
             val maybeGecko = getString(R.string.gecko_view_abbreviation)
-            val geckoVersion =
-                GeckoViewBuildConfig.MOZ_APP_VERSION + "-" + GeckoViewBuildConfig.MOZ_APP_BUILDID
+            val geckoVersion =""
+                // GeckoViewBuildConfig.MOZ_APP_VERSION + "-" + GeckoViewBuildConfig.MOZ_APP_BUILDID
             val appServicesAbbreviation = getString(R.string.app_services_abbreviation)
             val appServicesVersion = mozilla.components.Build.applicationServicesVersion
 

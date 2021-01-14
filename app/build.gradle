@@ -391,7 +391,7 @@ dependencies {
     jnaForTest Deps.jna
     testImplementation files(configurations.jnaForTest.copyRecursive().files)
 
-    debugImplementation Deps.mozilla_browser_engine_gecko_nightly
+    debugImplementation Deps.mozilla_browser_engine_system
 
     nightlyImplementation Deps.mozilla_browser_engine_gecko_nightly
     betaImplementation Deps.mozilla_browser_engine_gecko_beta
@@ -482,6 +482,8 @@ dependencies {
     implementation Deps.mozilla_support_utils
     implementation Deps.mozilla_support_locale
 
+    implementation Deps.mozilla_browser_fetch_httpurlconnection
+
     implementation Deps.mozilla_support_migration
 
     implementation Deps.mozilla_ui_colors
@@ -506,6 +508,7 @@ dependencies {
     implementation Deps.androidx_lifecycle_livedata
     implementation Deps.androidx_lifecycle_runtime
     implementation Deps.androidx_lifecycle_viewmodel
+    implementation Deps.androidx_lifecycle_process
     implementation Deps.androidx_core
     implementation Deps.androidx_core_ktx
     implementation Deps.androidx_transition
