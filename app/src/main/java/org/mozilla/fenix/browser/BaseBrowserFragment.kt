@@ -267,7 +267,7 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler,
             val readerMenuController = DefaultReaderModeController(
                 readerViewFeature,
                 view.readerViewControlsBar,
-                isPrivate = activity.browsingModeManager.mode.isPrivate
+                isPrivate = false //activity.browsingModeManager.mode.isPrivate
             )
             val browserToolbarController = DefaultBrowserToolbarController(
                 store = store,

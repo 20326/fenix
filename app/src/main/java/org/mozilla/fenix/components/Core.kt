@@ -244,7 +244,7 @@ class Core(
     val sessionManager by lazyMonitored {
         SessionManager(engine, store).also {
             // Install the "icons" WebExtension to automatically load icons for every visited website.
-            icons.install(engine, store)
+//            icons.install(engine, store)
 
             // Install the "ads" WebExtension to get the links in an partner page.
             // adsTelemetry.install(engine, store)

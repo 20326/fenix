@@ -48,7 +48,7 @@ import mozilla.components.concept.engine.EngineView
 import mozilla.components.concept.storage.BookmarkNode
 import mozilla.components.concept.storage.BookmarkNodeType
 import mozilla.components.feature.contextmenu.DefaultSelectionActionDelegate
-import mozilla.components.feature.privatemode.notification.PrivateNotificationFeature
+// import mozilla.components.feature.privatemode.notification.PrivateNotificationFeature
 import mozilla.components.feature.search.BrowserStoreSearchAdapter
 import mozilla.components.feature.search.ext.legacy
 import mozilla.components.service.fxa.sync.SyncReason
@@ -131,8 +131,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
     private var isVisuallyComplete = false
 
-    private var privateNotificationObserver: PrivateNotificationFeature<PrivateNotificationService>? =
-        null
+//    private var privateNotificationObserver: PrivateNotificationFeature<PrivateNotificationService>? =
+//        null
 
     private var isToolbarInflated = false
 
@@ -189,13 +189,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 .attachViewToRunVisualCompletenessQueueLater(WeakReference(rootContainer))
         }
 
-        privateNotificationObserver = PrivateNotificationFeature(
-            applicationContext,
-            components.core.store,
-            PrivateNotificationService::class
-        ).also {
-            it.start()
-        }
+//        privateNotificationObserver = PrivateNotificationFeature(
+//            applicationContext,
+//            components.core.store,
+//            PrivateNotificationService::class
+//        ).also {
+//            it.start()
+//        }
 
         if (isActivityColdStarted(
                 intent,
@@ -412,7 +412,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             )
         )
 
-        privateNotificationObserver?.stop()
+        // privateNotificationObserver?.stop()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
