@@ -252,10 +252,10 @@ class Core(
             // Install the "cookies" WebExtension and tracks user interaction with SERPs.
             // searchTelemetry.install(engine, store)
 
-            WebNotificationFeature(
-                context, engine, icons, R.drawable.ic_status_logo,
-                permissionStorage.permissionsStorage, HomeActivity::class.java
-            )
+//            WebNotificationFeature(
+//                context, engine, icons, R.drawable.ic_status_logo,
+//                permissionStorage.permissionsStorage, HomeActivity::class.java
+//            )
 
             if (newMediaSessionApi) {
                 MediaSessionFeature(context, MediaSessionService::class.java, store).start()
