@@ -33,11 +33,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.components.FenixSnackbar
 import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.metrics.Event
-import org.mozilla.fenix.ext.components
-import org.mozilla.fenix.ext.nav
-import org.mozilla.fenix.ext.navigateSafe
-import org.mozilla.fenix.ext.requireComponents
-import org.mozilla.fenix.ext.settings
+import org.mozilla.fenix.ext.*
 import org.mozilla.fenix.shortcut.PwaOnboardingObserver
 import org.mozilla.fenix.trackingprotection.TrackingProtectionOverlay
 
@@ -74,23 +70,23 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
                 )
             }
 
-//            val readerModeAction =
-//                BrowserToolbar.ToggleButton(
-//                    image = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_readermode)!!,
-//                    imageSelected =
-//                        AppCompatResources.getDrawable(requireContext(), R.drawable.ic_readermode_selected)!!,
-//                    contentDescription = requireContext().getString(R.string.browser_menu_read),
-//                    contentDescriptionSelected = requireContext().getString(R.string.browser_menu_read_close),
-//                    visible = {
-//                        readerModeAvailable
-//                    },
-//                    selected = getSessionById()?.let {
-//                            activity?.components?.core?.store?.state?.findTab(it.id)?.readerState?.active
-//                        } ?: false,
-//                    listener = browserInteractor::onReaderModePressed
-//                )
-//
-//            browserToolbarView.view.addPageAction(readerModeAction)
+            val readerModeAction =
+                BrowserToolbar.ToggleButton(
+                    image = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_readermode)!!,
+                    imageSelected =
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.ic_readermode_selected)!!,
+                    contentDescription = requireContext().getString(R.string.browser_menu_read),
+                    contentDescriptionSelected = requireContext().getString(R.string.browser_menu_read_close),
+                    visible = {
+                        readerModeAvailable
+                    },
+                    selected = getSessionById()?.let {
+                            activity?.components?.core?.store?.state?.findTab(it.id)?.readerState?.active
+                        } ?: false,
+                    listener = browserInteractor::onReaderModePressed
+                )
+
+            browserToolbarView.view.addPageAction(readerModeAction)
 
             thumbnailsFeature.set(
                 feature = BrowserThumbnails(context, view.engineView, components.core.store),
@@ -98,30 +94,30 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
                 view = view
             )
 
-//            readerViewFeature.set(
-//                feature = components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
-//                    ReaderViewFeature(
-//                        context,
-//                        components.core.engine,
-//                        components.core.store,
-//                        view.readerViewControlsBar
-//                    ) { available, active ->
-//                        if (available) {
-//                            components.analytics.metrics.track(Event.ReaderModeAvailable)
-//                        }
-//
-//                        readerModeAvailable = available
-//                        readerModeAction.setSelected(active)
-//
-//                        runIfFragmentIsAttached {
-//                            browserToolbarView.view.invalidateActions()
-//                            browserToolbarView.toolbarIntegration.invalidateMenu()
-//                        }
-//                    }
-//                },
-//                owner = this,
-//                view = view
-//            )
+            readerViewFeature.set(
+                feature = components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
+                    ReaderViewFeature(
+                        context,
+                        components.core.engine,
+                        components.core.store,
+                        view.readerViewControlsBar
+                    ) { available, active ->
+                        if (available) {
+                            components.analytics.metrics.track(Event.ReaderModeAvailable)
+                        }
+
+                        readerModeAvailable = available
+                        readerModeAction.setSelected(active)
+
+                        runIfFragmentIsAttached {
+                            browserToolbarView.view.invalidateActions()
+                            browserToolbarView.toolbarIntegration.invalidateMenu()
+                        }
+                    }
+                },
+                owner = this,
+                view = view
+            )
 
             windowFeature.set(
                 feature = WindowFeature(
