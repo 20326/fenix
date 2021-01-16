@@ -189,7 +189,7 @@ class Core(
             mutableListOf(
                 RecentlyClosedMiddleware(context, RECENTLY_CLOSED_MAX, engine),
                 DownloadMiddleware(context, DownloadService::class.java),
-                ReaderViewMiddleware(),
+//                ReaderViewMiddleware(),
 //                TelemetryMiddleware(
 //                    context.settings(),
 //                    adsTelemetry,
