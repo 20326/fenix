@@ -50,7 +50,6 @@ import mozilla.components.browser.state.state.content.DownloadState
 import mozilla.components.browser.state.store.BrowserStore
 import mozilla.components.browser.thumbnails.BrowserThumbnails
 import mozilla.components.concept.engine.prompt.ShareData
-import mozilla.components.feature.accounts.FxaCapability
 import mozilla.components.feature.accounts.FxaWebChannelFeature
 import mozilla.components.feature.app.links.AppLinksFeature
 import mozilla.components.feature.contextmenu.ContextMenuCandidate
@@ -686,19 +685,19 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler,
                 )
             }
 
-            webchannelIntegration.set(
-                feature = FxaWebChannelFeature(
-                    requireContext(),
-                    customTabSessionId,
-                    requireComponents.core.engine,
-                    requireComponents.core.store,
-                    requireComponents.backgroundServices.accountManager,
-                    requireComponents.backgroundServices.serverConfig,
-                    setOf(FxaCapability.CHOOSE_WHAT_TO_SYNC)
-                ),
-                owner = this,
-                view = view
-            )
+//            webchannelIntegration.set(
+//                feature = FxaWebChannelFeature(
+//                    requireContext(),
+//                    customTabSessionId,
+//                    requireComponents.core.engine,
+//                    requireComponents.core.store,
+//                    requireComponents.backgroundServices.accountManager,
+//                    requireComponents.backgroundServices.serverConfig,
+//                    setOf(FxaCapability.CHOOSE_WHAT_TO_SYNC)
+//                ),
+//                owner = this,
+//                view = view
+//            )
 
             initializeEngineView(toolbarHeight)
         }

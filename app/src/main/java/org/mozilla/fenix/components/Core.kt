@@ -11,7 +11,7 @@ import android.os.Build
 import android.os.StrictMode
 import androidx.core.content.ContextCompat
 import io.sentry.Sentry
-//import mozilla.components.browser.engine.gecko.GeckoEngine
+// import mozilla.components.browser.engine.gecko.GeckoEngine
 import mozilla.components.browser.engine.system.SystemEngine
 //import mozilla.components.browser.engine.gecko.fetch.GeckoViewFetchClient
 import mozilla.components.lib.fetch.httpurlconnection.HttpURLConnectionClient
@@ -190,11 +190,11 @@ class Core(
                 RecentlyClosedMiddleware(context, RECENTLY_CLOSED_MAX, engine),
                 DownloadMiddleware(context, DownloadService::class.java),
                 ReaderViewMiddleware(),
-                TelemetryMiddleware(
-                    context.settings(),
-                    adsTelemetry,
-                    metrics
-                ),
+//                TelemetryMiddleware(
+//                    context.settings(),
+//                    adsTelemetry,
+//                    metrics
+//                ),
                 ThumbnailsMiddleware(thumbnailStorage),
                 UndoMiddleware(::lookupSessionManager, context.getUndoDelay()),
                 RegionMiddleware(context, locationService),
@@ -247,10 +247,10 @@ class Core(
             icons.install(engine, store)
 
             // Install the "ads" WebExtension to get the links in an partner page.
-            adsTelemetry.install(engine, store)
+            // adsTelemetry.install(engine, store)
 
             // Install the "cookies" WebExtension and tracks user interaction with SERPs.
-            searchTelemetry.install(engine, store)
+            // searchTelemetry.install(engine, store)
 
             WebNotificationFeature(
                 context, engine, icons, R.drawable.ic_status_logo,
@@ -279,7 +279,7 @@ class Core(
     }
 
     val searchTelemetry by lazyMonitored {
-        InContentTelemetry(metrics)
+        // InContentTelemetry(metrics)
     }
 
     /**
